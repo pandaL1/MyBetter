@@ -20,7 +20,7 @@ import com.xq.user.pojos.User;
  * @vison 1.0
  */
 @Controller
-@RequestMapping("/user/")
+@RequestMapping(value ="/user/")
 public class UserController {
 
 	@Resource
@@ -28,7 +28,7 @@ public class UserController {
 	/**
 	 * 登录
 	 */
-	@RequestMapping("login")
+	@RequestMapping(value="login")
 	public ModelAndView login(@RequestParam(defaultValue="",required=true) String username,
 			@RequestParam(defaultValue="",required=true) String password){
 		ModelAndView mv=new ModelAndView();
@@ -50,7 +50,7 @@ public class UserController {
 	/**
 	 * 注册
 	 */
-	@RequestMapping("regist")
+	@RequestMapping(value="regist")
 	public ModelAndView regist(User user){
 		ModelAndView mv=new ModelAndView();
 		try {

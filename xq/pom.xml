@@ -6,7 +6,7 @@
 	<groupId>com.xq</groupId>
 	<artifactId>xq</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>xq</name>
 	<description>Demo project for Spring Boot</description>
@@ -70,6 +70,19 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<!--添加tomcat-->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-tomcat</artifactId>
+		    <scope>provided</scope>
+		</dependency>
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>javax.servlet-api</artifactId>
+		    <version>3.0.1</version>
+		    <scope>provided</scope>
+		</dependency>
+
 		<!--json-lib -->
         <dependency>
             <groupId>net.sf.json-lib</groupId>
@@ -127,13 +140,21 @@
 	</dependencies>
 
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+		<!-- 最后项目名称，war包名称 -->
+	    <finalName>xq.war</finalName>
+	    <plugins>
+	    	<plugin>
+			  <artifactId>maven-war-plugin</artifactId>
+			  <version>3.0.0</version><!--$NO-MVN-MAN-VER$-->
+			  <configuration>
+		        <!--如果想在没有web.xml文件的情况下构建WAR，请设置为false。-->      
+		        <failOnMissingWebXml>false</failOnMissingWebXml>                        
+		      </configuration>
 			</plugin>
-		</plugins>
+	        <plugin>
+	            <groupId>org.springframework.boot</groupId>
+	            <artifactId>spring-boot-maven-plugin</artifactId>
+	        </plugin>
+	    </plugins>
 	</build>
-
-
 </project>

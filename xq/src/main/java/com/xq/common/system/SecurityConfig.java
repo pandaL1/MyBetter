@@ -4,6 +4,7 @@
 package com.xq.common.system;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,16 +16,17 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  * @date 2018年12月4日 下午4:37:38
  * @vison 1.0
  */
-@EnableWebSecurity
+@Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
     private CustomAuthenticationProvider customAuthenticationProvider;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+    	http.headers().frameOptions().disable();
         // 所有请求均可访问
         http.authorizeRequests()
-                .antMatchers("/", "/login", "/login-error", "/css/**", "/index")
+                .antMatchers("/**", "/login", "/login-error", "/views/**","/css/**","/fonts/**","/images/**","/js/**","/lib/**")
                 .permitAll();
 
         // 其余所有请求均需要权限
@@ -35,8 +37,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         // 配置登录页面的表单 action 必须是 '/login', 用户名和密码的参数名必须是 'username' 和 'password'，
         // 登录失败的 url 是 '/login-error'
         http.formLogin()
-                .loginPage("/login")
-                .loginProcessingUrl("/login")
+                .loginPage("/")
+                .loginProcessingUrl("/")
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .failureUrl("/login-error");
